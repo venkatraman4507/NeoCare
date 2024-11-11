@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <HEADER>
+        <img src="C:\Users\ADMIN\Downloads\Screenshot_2023-11-24_182853-removebg-preview.png" alt="logo">
+        <h1>NeoCare</h1>
+        <div class="buttons">
+            <button id="b1">Home</button>
+            <button id="b2">Login</button>
+            <button id="b3">Products</button>
+            <button id="b4">About Us</button>
+        </div>
+    </HEADER>
+    <script>
+        // Initialize Firebase with your configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyARF1_yCCnINWpyttppH29qxCsSObdozq8",
+              authDomain: "nicu-5c8c4.firebaseapp.com",
+              databaseURL: "https://nicu-5c8c4-default-rtdb.firebaseio.com",
+              projectId: "nicu-5c8c4",
+              storageBucket: "nicu-5c8c4.appspot.com",
+              messagingSenderId: "496145769207",
+              appId: "1:496145769207:web:ec58724f2aac12fc34a9f2",
+              measurementId: "G-0391R2ZHPQ"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Defer execution until the document is fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            function validateLogin() {
+                const babyId = document.getElementById('babyId').value;
+                const nicuId = document.getElementById('nicuId').value;
+
+                // Fetch the user from Firebase based on babyId
+                database.ref(babyId).once('value', (snapshot) => {
+                    const userData = snapshot.val();
+                    console.log(userData)
+
+                    if (userData && userData === nicuId) {
+                        // Login successful, redirect to the next page
+                        window.location.href = 'ncREAL.html'; // Replace with your actual next page
+                    } else {
+                        // Show error message (baby id or nicu id is incorrect)
+                        alert('Baby ID or NICU ID is incorrect');
+                    }
+                });
+            }
+
+            // Attach the validateLogin function to the button click event
+            const loginButton = document.getElementById('loginButton');
+            if (loginButton) {
+                loginButton.addEventListener('click', validateLogin);
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get references to the buttons
+            var loginButton = document.getElementById("b2");
+            var homeButton = document.getElementById("b1");
+            var productsButton = document.getElementById("b3");
+            var aboutUsButton = document.getElementById("b4");
+
+            // Add click event listeners to the buttons
+            loginButton.addEventListener("click", function() {
+                window.location.href = "ncLOGIN.html"; // Replace with the actual login page
+            });
+
+            homeButton.addEventListener("click", function() {
+                window.location.href = "ncHOME.html"; // Replace with the actual home page
+            });
+
+            productsButton.addEventListener("click", function() {
+                window.location.href = "ncHOME.html"; // Replace with the actual products page
+            });
+
+            aboutUsButton.addEventListener("click", function() {
+                window.location.href = "ncABOUT.html"; // Replace with the actual about us page
+            });
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .buttons {
+    
+            display: flex;
+            justify-content: left; /* Center buttons horizontally */
+            align-items: center; /* Center buttons vertically */
+            flex-grow: 1;
+            left: 50px;
+            background-color: transparent;
+
+        }
+
+        .b1{
+            margin-left: 385px;
+        }
+
+        .buttons button {
+        margin-right: 20px;
+        background-color: transparent;
+        border-color: transparent;
+        color: white;
+        font-size: 18px;
+        }
+
+        .buttons button:hover {
+            background-color: #00826b;
+     /* Change background color on hover */
+            }
+        header {
+            background-color: #49c5b1;
+            color: #fff;
+            padding: 20px;
+            width: 100%;
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Center items vertically */
+                }
+
+        header img {
+            max-width: 100px; /* Adjust the max-width as needed */
+            height: auto;
+            margin-right: 10px; /* Optional margin for spacing */
+            }
+
+        header h1 {
+            margin: 0; /* Remove default margin for h1 */
+            }
+
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #49c5b1;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #00826b;
+        }
+        /* Your existing CSS styles remain unchanged */
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Login</h2>
+    <form>
+        <label for="babyId">Baby ID:</label>
+        <input type="text" id="babyId" name="babyId" required>
+
+        <label for="nicuId">NICU ID:</label>
+        <input type="password" id="nicuId" name="nicuId" required>
+
+        <!-- Use id attribute for button to enable easier selection -->
+        <button type="button" id="loginButton">Login</button>
+    </form>
+</div>
+
+</body>
+</html>

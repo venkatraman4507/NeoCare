@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <HEADER>
+        <img src="LOGO.png" alt="logo">
+        <h1>NeoCare</h1>
+        <div class="buttons">
+            
+            <button id="b1">Home</button>
+            <button id="b2">Login</button>
+            <button id="b3">Products</button>
+            <button id="b4">About Us</button>
+        </div>
+    </HEADER>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .buttons {
+    
+            display: flex;
+            justify-content: left; /* Center buttons horizontally */
+            align-items: center; /* Center buttons vertically */
+            flex-grow: 1;
+            left: 50px;
+            background-color: transparent;
+            margin-left: 325px;
+
+        }
+        .e{
+            padding-right: 1800px;
+        }
+
+        .b1{
+            margin-left: 785px;
+        }
+
+        .buttons button {
+        margin-right: 20px;
+        background-color: transparent;
+        border-color: transparent;
+        color: white;
+        font-size: 18px;
+        }
+
+        .buttons button:hover {
+            background-color: #00826b;
+     /* Change background color on hover */
+            }
+        header {
+            background-color: #49c5b1;
+            color: #fff;
+            padding: 20px;
+            width: 100%;
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Center items vertically */
+                }
+
+        header img {
+            max-width: 100px; /* Adjust the max-width as needed */
+            height: auto;
+            margin-right: 10px; /* Optional margin for spacing */
+            }
+
+        header h1 {
+            margin: 0; /* Remove default margin for h1 */
+            }
+
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .buttons {
+    
+    display: flex;
+    justify-content: left; /* Center buttons horizontally */
+    align-items: center; /* Center buttons vertically */
+    flex-grow: 1;
+    left: 50px;
+    background-color: transparent;
+
+    }
+
+.b1{
+    margin-left: 685px;
+}
+
+.buttons button {
+    margin-right: 20px;
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: 18px;
+    }
+
+.buttons button:hover {
+    background-color: #00826b;
+     /* Change background color on hover */
+    }
+
+.gallery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 80vh;
+    margin-left: 0px;
+        }
+
+.gallery img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1px;
+    margin-left: 25px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    
+    
+
+.gallery figcaption {
+    text-align: center;
+    color: #555;
+    margin-left: 20px;
+    margin-top: 40px;
+    font-weight: bold;
+    font-size: 20px;
+    
+    }
+
+.w1 {
+    color: red;
+    
+
+}
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <figure>
+            <img src="C:\Users\ADMIN\Downloads\intensive-care-for-newborns.jpg" alt="Image 1" width="400" height="200">
+            <figcaption>REAL-TIME MONITORING</figcaption>
+            <figcaption style="color: #49c5b1">Shows the current health status</figcaption>
+        </figure>
+    
+        <figure>
+            <img src="C:\Users\ADMIN\Downloads\watching-the-baby-sleep.jpg" alt="Image 2" width="400" height="200">
+            <figcaption>POSE DETECTION</figcaption>
+            <figcaption style="color: #49c5b1">Ensures the safe lying </figcaption>
+
+        </figure>
+    
+        <figure>
+            <img src="C:\Users\ADMIN\Downloads\360_F_472905605_ATArs2X51yRiq2SxrnQab04Qc5I8LLaq.jpg" alt="Image 3" width="400" height="200">
+            <figcaption>ALERT SYSTEM</figcaption>
+            <figcaption style="color: #49c5b1">Alerts if Vital signs is in risk</figcaption>
+
+        </figure>
+    </div>
+    <script>
+    
+     
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get references to the buttons
+            var loginButton = document.getElementById("b2");
+            var homeButton = document.getElementById("b1");
+            var productsButton = document.getElementById("b3");
+            var aboutUsButton = document.getElementById("b4");
+
+            // Add click event listeners to the buttons
+            loginButton.addEventListener("click", function() {
+                window.location.href = "ncLOGIN.html"; // Replace with the actual login page
+            });
+
+            homeButton.addEventListener("click", function() {
+                window.location.href = "ncHOME.html"; // Replace with the actual home page
+            });
+
+            productsButton.addEventListener("click", function() {
+                window.location.href = "ncHOME.html"; // Replace with the actual products page
+            });
+
+            aboutUsButton.addEventListener("click", function() {
+                window.location.href = "ncABOUT.html"; // Replace with the actual about us page
+            });
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

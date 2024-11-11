@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            flex-grow: 1;
+            left: 50px;
+            background-color: transparent;
+            margin-left: 325px;
+        }
+
+        .b1 {
+            margin-left: 385px;
+        }
+
+        .buttons button {
+            margin-right: 20px;
+            background-color: transparent;
+            border-color: transparent;
+            color: white;
+            font-size: 18px;
+        }
+
+        .buttons button:hover {
+            background-color: #00826b;
+        }
+
+        header {
+            background-color: #49c5b1;
+            color: #fff;
+            padding: 10px; /* Reduced padding */
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* 10px margin between header and labels */
+        }
+
+        header img {
+            max-width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .charts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .chart-container {
+            width: 48%;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        .label-container {
+            margin-top: 10px; /* Reduced margin */
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin: 10px 0;
+        }
+
+        .label {
+            text-align: center;
+            color: #555;
+        }
+        /* Your existing styles here */
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="C:\Users\ADMIN\Downloads\Screenshot_2023-11-24_182853-removebg-preview.png" alt="logo">
+        <h1>NeoCare</h1>
+        <div class="buttons">
+           <button id="b1">Home</button>
+            <button id="b2">Login</button>
+            <button id="b3">Products</button>
+            <button id="b4">About Us</button>
+        <!-- Your header content here -->
+    </header>
+
+    <div class="label-container">
+        <div class="label">Heart Rate: <span id="heartRate">--</span></div>
+        <div class="label">SpO2: <span id="spo2">--</span></div>
+        <div class="label">Temperature: <span id="temperature">--</span></div>
+        <div class="label">Humidity: <span id="humidity">--</span></div>
+    </div>
+
+    <div class="charts">
+        <div class="chart-container">
+            <canvas id="lineChart1"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="lineChart2"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="lineChart3"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="lineChart4"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyD6PjPSV6aZgSTEMuN7A8JfHxAp_shYIV4",
+              authDomain: "prac-7a3f6.firebaseapp.com",
+              databaseURL: "https://prac-7a3f6-default-rtdb.firebaseio.com",
+              projectId: "prac-7a3f6",
+              storageBucket: "prac-7a3f6.appspot.com",
+              messagingSenderId: "28319509344",
+              appId: "1:28319509344:web:70523e129bff4156fd4c05",
+              measurementId: "G-7P5CM7KQZP"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        const charts = [];
+        let heartRateLabel = document.getElementById('heartRate');
+        let spo2Label = document.getElementById('spo2');
+        let temperatureLabel = document.getElementById('temperature');
+        let humidityLabel = document.getElementById('humidity');
+
+        function updateLabels() {
+            // Fetch the latest data from Firebase for each key
+            fetchAndPlot('heartrate', 'lineChart1', 'HEART RATE', 0);
+            fetchAndPlot('spo2', 'lineChart2', 'SpO2', 1);
+            fetchAndPlot('temperature', 'lineChart3', 'Temperature', 2);
+            fetchAndPlot('humidity', 'lineChart4', 'Humidity', 3);
+        }
+
+        function fetchAndPlot(key, chartId, label, index) {
+            database.ref(key).limitToLast(6).once('value').then(snapshot => {
+                const data = snapshot.val();
+                const values = data ? Object.values(data) : [];
+                updateChart(chartId, label, values, index);
+                updateLabel(key, values[0]);
+            });
+        }
+        function updateLabel(key, value) {
+            switch (key) {
+                case 'heartrate':
+                    heartRateLabel.textContent = value;
+                    break;
+                case 'spo2':
+                    spo2Label.textContent = value;
+                    break;
+                case 'temperature':
+                    temperatureLabel.textContent = value;
+                    break;
+                case 'humidity':
+                    humidityLabel.textContent = value;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function updateChart(chartId, label, values, index) {
+            // Destroy the previous chart instance
+            if (charts[index]) {
+                charts[index].destroy();
+            }
+
+            const ctx = document.getElementById(chartId).getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({ length: values.length }, (_, i) => `Label ${i + 1}`),
+                    datasets: [{
+                        label: label,
+                        borderColor: getRandomColor(),
+                        borderWidth: 2,
+                        data: values,
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'X-axis Label'
+                            }
+                        }],
+                        y: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Y-axis Label'
+                            }
+                        }]
+                    }
+                }
+            });
+
+            // Store the new chart instance
+            charts[index] = chart;
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateLabels();
+            setInterval(updateLabels, 5000); // Update every 5 seconds
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get references to the buttons
+            var loginButton = document.getElementById("b2");
+            var homeButton = document.getElementById("b1");
+            var productsButton = document.getElementById("b3");
+            var aboutUsButton = document.getElementById("b4");
+
+            // Add click event listeners to the buttons
+            loginButton.addEventListener("click", function() {
+                window.location.href = "ncLOGIN.html"; // Replace with the actual login page
+            });
+
+            homeButton.addEventListener("click", function() {
+                window.location.href = "ncHOME.html"; // Replace with the actual home page
+            });
+
+            productsButton.addEventListener("click", function() {
+                window.location.href = "ncHOME.html"; // Replace with the actual products page
+            });
+
+            aboutUsButton.addEventListener("click", function() {
+                window.location.href = "ncABOUT.html"; // Replace with the actual about us page
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: "https://s3-alpha-sig.figma.com/img/b468/5ee4/ec0105499dea66f01ec97712776f3626?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FGNd2QGimcLQUaKHDUZ6TyvvB3mrv1ROY-6~AF5-We0d6TKRlhuQPVmsXynaFkU4OAlz65bdxtBJoIMYzlMgyDxsO-18zsWTsl-2LMBAAf3zwHJlXo95aN8vf~NA8dpcX7SYUDeJnM4iw886Rk-XMBYAEx4UjF2XMsC5vq8FarqH-bwrqHB7NM8kHiAEDGfNqsu-vR68zkRmLy5kXrcnCs2DAVgFIdqq6HlyJn7tDjykgwFp0~ZLLZ7bGh2b~ZmWgDcl~a0j7W7HksQOQPIIrqiQ6hDLdspUv4QbSpzDFAc3HtGKrpT-Q78lDI-ElsKw9I8s168yDwVeG71eql2T1A__";
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            flex-grow: 1;
+            left: 50px;
+            background-color: transparent;
+            margin-left: 325px;
+        }
+
+        .b1 {
+            margin-left: 385px;
+        }
+
+        .buttons button {
+            margin-right: 20px;
+            background-color: transparent;
+            border-color: transparent;
+            color: white;
+            font-size: 18px;
+        }
+
+        .buttons button:hover {
+            background-color: #00826b;
+        }
+
+        header {
+            background-color: #49c5b1;
+            color: #fff;
+            padding: 10px; /* Reduced padding */
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* 10px margin between header and labels */
+        }
+
+        header img {
+            max-width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .q1{
+            text-align: center;
+            margin-top: 80px;
+            font-size: 24px;
+            background-color: transparent;
+
+
+        }
+
+        .w1{
+          text-align: center;  
+        }
+
+        .sd{
+            max-width: 500px;
+            max-height: 500px;
+        }
+
+        
+       
+
+    </style>
+
+    <body>
+        
+    <header>
+        <img src="C:\Users\ADMIN\Downloads\Screenshot_2023-11-24_182853-removebg-preview.png" alt="logo">
+        <h1>NeoCare</h1>
+        <div class="buttons">
+            <button id="b1">Home</button>
+            <button id="b2">Login</button>
+            <button id="b3">Products</button>
+            <button id="b4">About Us</button>
+    </header>
+    
+        
+    
+    <div class="q1"> 
+       
+        <p>We are NeoCare<p>
+        <p> we are driven by a passion for delivering compassionate and personalized care. Our team of skilled healthcare professionals, including doctors, nurses, and support staff, is dedicated to ensuring that every patient receives the highest quality of medical attention.</p>
+        <p>Our core values include:</p>
+        <ul class="w1">
+            <li>Compassion: We understand the importance of empathy and kindness in healthcare.</li>
+            <li>Excellence: We continuously strive for excellence in medical treatment and patient care.</li>
+            <li>Innovation: Embracing cutting-edge technologies and medical advancements to enhance outcomes.</li>
+            <li>Community: We are an integral part of the community, actively participating in health initiatives.</li>
+        </ul>
+        <p>Whether you are seeking routine check-ups, specialized treatments, or emergency care, NeoCare is here for you. We prioritize your health and well-being, providing comprehensive medical services for individuals and families.</p>
+
+        <p>Thank you for choosing NeoCare as your healthcare partner. We look forward to serving you and contributing to a healthier community.</p>
+    </div>
+
+    <script >
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get references to the buttons
+            var loginButton = document.getElementById("b2");
+            var homeButton = document.getElementById("b1");
+            var productsButton = document.getElementById("b3");
+            var aboutUsButton = document.getElementById("b4");
+
+            // Add click event listeners to the buttons
+            loginButton.addEventListener("click", function() {
+                window.location.href = "ncLOGIN.html"; // Replace with the actual login page
+            });
+
+            homeButton.addEventListener("click", function() {
+                window.location.href = "ncHOME.html"; // Replace with the actual home page
+            });
+
+            productsButton.addEventListener("click", function() {
+                window.location.href = "ncHOME.html"; // Replace with the actual products page
+            });
+
+            aboutUsButton.addEventListener("click", function() {
+                window.location.href = "ncABOUT.html"; // Replace with the actual about us page
+            });
+        });
+    </script>
+
+</body>
+</html>
+    </div>
+    
+
+
